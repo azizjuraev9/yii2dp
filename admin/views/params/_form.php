@@ -21,8 +21,6 @@ $url = $model->isNewRecord ? Url::to(['params/create']) : Url::to(['params/updat
 
     <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
 
-    <?= InputFactory::get($model->type,$form,$model) ?>
-
     <?= $form->field($model, 'type')->dropDownList([
             'Text'      => 'Text',
             'Select'    => 'Select',

@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use juraev\yii2dp\admin\form_factory\FormFactory;
+use yii\filters\AccessControl;
 
 /**
  * ParamsController implements the CRUD actions for Params model.
@@ -25,6 +26,19 @@ class ParamsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => $this->module->canEdit(),
+                    ],
+                    [
+                        'actions' => ['create','update','delete'],
+                        'allow' => $this->module->canCreate(),
+                    ],
                 ],
             ],
         ];

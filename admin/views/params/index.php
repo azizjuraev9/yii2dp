@@ -14,12 +14,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="params-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h1 class="page-header clearfix">
+        <?= Html::encode($this->title) ?>
+        <?php
+        if(Yii::$app->controller->module->canCreate())
+             echo Html::a(Yii::t('app', 'Create Params'), ['create'], ['class' => 'btn btn-success pull-right'])
+        ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Params'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    </h1>
+
+
 
     <?php $form = ActiveForm::begin([
         'fieldConfig' => [
@@ -29,17 +33,20 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
     <?php
         foreach ($models as $model){
-            $buttons = "<div class='pull-right'>";
-            $buttons .= Html::a('Update', ['update', 'id' => $model->id],['class' => 'btn btn-success btn-sm',]);
-            $buttons .= " ";
-            $buttons .= Html::a('Delete', ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger btn-sm',
-                'data' => [
-                    'confirm' => 'Are you sure you want to delete this item?',
-                    'method' => 'post',
-                ],
-            ]);
-            $buttons .= "</div>";
+            $buttons = '';
+            if(Yii::$app->controller->module->canCreate()){
+                $buttons = "<div class='pull-right'>";
+                $buttons .= Html::a('Update', ['update', 'id' => $model->id],['class' => 'btn btn-success btn-sm',]);
+                $buttons .= " ";
+                $buttons .= Html::a('Delete', ['delete', 'id' => $model->id], [
+                    'class' => 'btn btn-danger btn-sm',
+                    'data' => [
+                        'confirm' => 'Are you sure you want to delete this item?',
+                        'method' => 'post',
+                    ],
+                ]);
+                $buttons .= "</div>";
+            }
             echo str_replace("{buttons}",$buttons,InputFactory::get($model->type,$form,$model));
         }
     ?>
