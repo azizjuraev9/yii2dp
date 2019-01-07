@@ -4,7 +4,6 @@ namespace juraev\yii2dp\admin\controllers;
 
 use Yii;
 use juraev\yii2dp\admin\models\Params;
-use juraev\yii2dp\admin\models\ParamsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

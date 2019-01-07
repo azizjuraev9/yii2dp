@@ -10,6 +10,7 @@ namespace juraev\yii2dp;
 
 
 use yii\helpers\ArrayHelper;
+use juraev\yii2dp\admin\models\Params;
 
 class Params
 {
@@ -19,7 +20,7 @@ class Params
     private static $_instance;
 
     private function __construct() {
-        $this->_params = ArrayHelper::map(\common\models\Params::find()->all(),'key','val');
+        $this->_params = ArrayHelper::map(Params::find()->all(),'key','val');
     }
 
     private function getParam($k){
