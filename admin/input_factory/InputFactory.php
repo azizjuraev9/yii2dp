@@ -27,9 +27,25 @@ class InputFactory
 
     public static function error(Params $model,$message){
         if(Yii::$app->controller->module->canCreate()){
-            $error = "<div class=\"panel panel-danger\"><div class=\"panel-heading clearfix\">";
+
+            $bs = @Yii::$app->module->bs;
+
+            $panel = '';
+            $right = '';
+            if($bs == 4)
+            {
+                $right = 'float-right';
+                $panel = 'card';
+            }
+            else
+            {
+                $right = 'pull-right';
+                $panel = 'panel';
+            }
+            
+            $error = "<div class=\"$panel $panel-danger\"><div class=\"$panel-heading clearfix\">";
             $error .= $model->title;
-            $error .= "<div class='pull-right'>";
+            $error .= "<div class='$right'>";
             $error .= Html::a('Update', ['update', 'id' => $model->id],['class' => 'btn btn-success btn-sm',]);
             $error .= " ";
             $error .= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -40,7 +56,7 @@ class InputFactory
                 ],
             ]);
             $error .= "</div>";
-            $error .= "</div><div class=\"panel-body\"><h3>";
+            $error .= "</div><div class=\"$panel-body\"><h3>";
             $error .= $message;
             $error .= "</h3></div></div>";
             return $error;

@@ -61,8 +61,12 @@ class ParamsController extends Controller
 //            echo "<h3><pre>";var_dump(Yii::$app->request->post());die;
 //        }
 
+        $bs = $this->module->bs;
+//        var_dump($bs);die;
+
         return $this->render('index', [
             'models' => $models,
+            'bs' => $bs,
         ]);
     }
 

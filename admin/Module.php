@@ -15,6 +15,8 @@ class Module extends \yii\base\Module
 
     public $defaultRoute = 'params/index';
 
+    public $bs = 3;
+
     /**
      * {@inheritdoc}
      */

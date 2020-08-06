@@ -11,6 +11,21 @@ use yii\widgets\ActiveForm;
 
 $this->title = Yii::t('app', 'Params');
 $this->params['breadcrumbs'][] = $this->title;
+
+$template = '';
+$right = '';
+if($bs == 4)
+{
+    $right = 'float-right';
+    $template = '<div class="card card-primary"><div class="card-header clearfix">{label}{buttons}</div><div class="card-body">{input}{error}</div></div>';
+}
+else
+{
+    $right = 'pull-right';
+    $template = '<div class="panel panel-primary"><div class="panel-heading clearfix">{label}{buttons}</div><div class="panel-body">{input}{error}</div></div>';
+}
+
+
 ?>
 <div class="params-index">
 
@@ -18,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::encode($this->title) ?>
         <?php
         if(Yii::$app->controller->module->canCreate())
-             echo Html::a(Yii::t('app', 'Create Params'), ['create'], ['class' => 'btn btn-success pull-right'])
+             echo Html::a(Yii::t('app', 'Create Params'), ['create'], ['class' => 'btn btn-success '.$right])
         ?>
 
     </h1>
@@ -27,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $form = ActiveForm::begin([
         'fieldConfig' => [
-            'template' => '<div class="panel panel-primary"><div class="panel-heading clearfix">{label}{buttons}</div><div class="panel-body">{input}{error}</div></div>',
+            'template' => $template,
         ],
 //        'action' => Url::to(['save']),
     ]); ?>
@@ -35,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
         foreach ($models as $model){
             $buttons = '';
             if(Yii::$app->controller->module->canCreate()){
-                $buttons = "<div class='pull-right'>";
+                $buttons = "<div class='$right'>";
                 $buttons .= Html::a('Update', ['update', 'id' => $model->id],['class' => 'btn btn-success btn-sm',]);
                 $buttons .= " ";
                 $buttons .= Html::a('Delete', ['delete', 'id' => $model->id], [
