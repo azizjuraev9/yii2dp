@@ -17,6 +17,8 @@ class Module extends \yii\base\Module
 
     public $bs = 3;
 
+    public $viewPath = '@vendor/juraev/yii2dp/admin/views';
+
     /**
      * {@inheritdoc}
      */
